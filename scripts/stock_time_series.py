@@ -31,7 +31,7 @@ def analyze_publication_frequency(df, date_column):
     plt.show()
 
     # Ensure the 'plots' directory exists
-    save_path = "/home/am//Documents/Software Development/10_Academy Training/week1/stock-market-analysis/"
+    save_path = "/home/am/Documents/Software Development/10_Academy Training/week1/stock-market-analysis/plots/publication_frequency.png"
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
     # Save the plot to the specified path
