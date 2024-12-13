@@ -43,3 +43,35 @@ def perform_sentiment_analysis(df, column):
         lambda score: 'positive' if score > 0 else 'negative' if score < 0 else 'neutral'
     )
     return df
+
+def extract_topics(df, column, num_topics=5, num_keywords=10):
+    """
+    Extracts topics from text data using Latent Dirichlet Allocation (LDA).
+
+    Args:
+        df (pd.DataFrame): The input DataFrame.
+        column (str): The column containing text data.
+        num_topics (int): Number of topics to extract.
+        num_keywords (int): Number of keywords to display per topic.
+
+    Returns:
+        dict: A dictionary of topics with their keywords.
+    """
+    # Clean the text data
+    df['cleaned_text'] = df[column].apply(clean_text)
+
+    # Vectorize the text data
+    vectorizer = CountVectorizer(stop_words='english', max_df=0.9, min_df=2)
+    text_vectors = vectorizer.fit_transform(df['cleaned_text'])
+
+    # Apply LDA for topic modeling
+    lda = LatentDirichletAllocation(n_components=num_topics, random_state=42)
+    lda.fit(text_vectors)
+
+    topics = {}
+    for idx, topic in enumerate(lda.components_):
+        top_keywords = [vectorizer.get_feature_names_out()[i] for i in topic.argsort()[-num_keywords:]]
+        topics[f"Topic {idx + 1}"] = top_keywords
+
+    return topics
+
