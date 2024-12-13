@@ -14,3 +14,6 @@ notebooks/plots/
 
 # Ignore all corpos downoladed
 corpus/
+
+# Ignore plots
+plots/
