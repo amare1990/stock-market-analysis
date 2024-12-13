@@ -17,3 +17,8 @@ corpus/
 
 # Ignore plots
 plots/
+
+# Ignore large files
+notebooks/*.csv
+notebooks/*.txt
+
