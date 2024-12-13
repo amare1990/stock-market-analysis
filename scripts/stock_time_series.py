@@ -30,14 +30,36 @@ def analyze_publication_frequency(df, date_column):
     plt.grid(True)
     plt.show()
 
-    # Ensure the 'plots' directory exists
-    save_path = "/home/am/Documents/Software Development/10_Academy Training/week1/stock-market-analysis/plots/publication_frequency.png"
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    return daily_count
 
-    # Save the plot to the specified path
-    plt.savefig(save_path)
+def analyze_publishing_times(df, date_column):
+    """
+    Analyzes publishing times to find patterns during the day.
 
-    # Optionally, show the plot
+    Args:
+        df (pd.DataFrame): Input DataFrame.
+        date_column (str): Column containing datetime information.
+
+    Returns:
+        pd.DataFrame: Hourly publication frequencies.
+    """
+    # Convert the date column to datetime
+    df[date_column] = pd.to_datetime(df[date_column])
+
+    # Extract hour of publication
+    df['hour'] = df[date_column].dt.hour
+
+    # Group by hour and count publications
+    hourly_count = df.groupby('hour').size().reset_index(name='publication_count')
+
+    # Plot publication times
+    plt.figure(figsize=(12, 6))
+    sns.barplot(data=hourly_count, x='hour', y='publication_count', palette='viridis')
+    plt.title('Publishing Times Distribution')
+    plt.xlabel('Hour of the Day')
+    plt.ylabel('Number of Publications')
+    plt.xticks(range(0, 24))
+    plt.grid(True)
     plt.show()
 
-    return daily_count
+    return hourly_count
