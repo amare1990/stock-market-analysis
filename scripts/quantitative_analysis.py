@@ -43,3 +43,10 @@ class stock_quantitative_analyzer:
      self.stock_data['MACD'], self.stock_data['MACD_signal'], self.stock_data['MACD_hist'] = ta.MACD(
         self.stock_data['Close'], fastperiod=12, slowperiod=26, signalperiod=9
      )
+
+def calculate_financial_metrics(self):
+   """
+   Calculates financial metrics using PyNance (for portfolio, etc).
+   """
+   self.portfolio_metrics = pynance_data.portfolio(self.stock_data['Close'])
+
