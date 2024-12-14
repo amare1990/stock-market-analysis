@@ -26,3 +26,6 @@ class stock_quantitative_analyzer:
      if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
+     # Fetch stock data using yfinance
+     self.stock_data = yf.download(ticker, start=start_date, end=end_date)
+     self.stock_data['Date'] = self.stock_data.index
