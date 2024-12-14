@@ -29,3 +29,17 @@ class stock_quantitative_analyzer:
      # Fetch stock data using yfinance
      self.stock_data = yf.download(ticker, start=start_date, end=end_date)
      self.stock_data['Date'] = self.stock_data.index
+
+  def calculate_indicators(self):
+     """
+     Calculates technical indicators using TA-Lib.
+     """
+     #  Simple Moving Average (SMA)
+     self.stock_data['SMA-20'] = ta.SMA(self.stock_data['Close'], timeperiod=20)
+     # Relative Strength Index (RSI)
+     self.stock_data['RSI_14'] = ta.RSI(self.stock_data['Close'], timeperiod=14)
+
+     # Moving Average convergence Divergence (MACD)
+     self.stock_data['MACD'], self.stock_data['MACD_signal'], self.stock_data['MACD_hist'] = ta.MACD(
+        self.stock_data['Close'], fastperiod=12, slowperiod=26, signalperiod=9
+     )
