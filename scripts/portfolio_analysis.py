@@ -2,7 +2,7 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 from pypfopt import expected_returns, risk_models, EfficientFrontier
-# import pyfolio as pf
+import pyfolio as pf
 
 class PortfolioOptimizer:
     def __init__(self, tickers, start_date, end_date, output_folder):
@@ -45,3 +45,21 @@ class PortfolioOptimizer:
         cleaned_weights = ef.clean_weights()
 
         return cleaned_weights
+
+    def calculate_performance(self, weights):
+        """
+        Calculate portfolio performance using the calculated weights.
+
+        :param weights: Dictionary of portfolio weights
+        :return: Dictionary of performance metrics.
+        """
+        # Convert weights to a pandas series
+        weights_series = pd.Series(weights)
+
+        # Calculate portfolio returns using the asset returns and weights
+        portfolio_returns = (self.data.pct_change() * weights_series.T).sum(axis=1)
+
+        # Calculate performance metrics using PyFolio
+        perf = pf.timeseries.perf_stats(portfolio_returns)
+
+        return perf
