@@ -34,6 +34,7 @@ class stock_quantitative_analyzer:
      """
      Calculates technical indicators using TA-Lib.
      """
+
      #  Simple Moving Average (SMA)
      self.stock_data['SMA-20'] = ta.SMA(self.stock_data['Close'], timeperiod=20)
      # Relative Strength Index (RSI)
@@ -49,4 +50,22 @@ def calculate_financial_metrics(self):
    Calculates financial metrics using PyNance (for portfolio, etc).
    """
    self.portfolio_metrics = pynance_data.portfolio(self.stock_data['Close'])
+
+def plot_data(self):
+   """
+   Creates and saves visualizations for stock price and technical indicators.
+   """
+   #  Plot Stock Price and SMA
+   plt.figure(figsize=(12,6))
+   plt.plot(self.stock_data['Date'], self.stock_data['Close'], label='Stock Price')
+   plt.plot(self.stock_data['Date'], self.stock_data['SMA_20'], label='SMA (20)')
+   plt.title(f"{self.ticker} Stock price & SMA")
+   plt.xlabel('Date')
+   plt.ylabel('Price')
+   plt.legend()
+   plt.xticks(rotation=45)
+   plt.tight_layout()
+   plt.savefig(os.path.join(self.output_folder, f'{self.ticker}_stock_sma.png'))
+   plt.close()
+
 
