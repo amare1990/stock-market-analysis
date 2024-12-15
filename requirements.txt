@@ -88,8 +88,9 @@ psutil==6.1.0
 ptyprocess==0.7.0
 pure-eval==0.2.3
 pycparser==2.22
+pyfolio==0.9.2
 pygments==2.18.0
--e git+https://github.com/amare1990/stock-market-analysis.git@67004bd758b8d0cf73f74aa9d66b16d801c432b4#egg=pynance
+-e git+https://github.com/amare1990/stock-market-analysis.git@13418a5a043f08834dba46a3415e5de17541032f#egg=pynance
 pyparsing==3.1.4
 pyportfolioopt==1.5.5
 python-dateutil==2.9.0.post0
