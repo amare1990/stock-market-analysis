@@ -1,8 +1,9 @@
-import yfinance as yf
+import os
 import pandas as pd
-import numpy as np
-from pypfopt import expected_returns, risk_models, EfficientFrontier
+import yfinance as yf
 import pyfolio as pf
+from pypfopt import expected_returns, risk_models, EfficientFrontier
+import matplotlib.pyplot as plt
 
 class PortfolioOptimizer:
     def __init__(self, tickers, start_date, end_date, output_folder):
@@ -63,3 +64,28 @@ class PortfolioOptimizer:
         perf = pf.timeseries.perf_stats(portfolio_returns)
 
         return perf
+
+    def plot_portfolio_returns(self, weights):
+        """
+        Plot portfolio returns using PyFolio.
+
+        :param weights: Dictionary of portfolio weights
+        """
+        # Convert weights to pandas series
+        weights_series = pd.Series(weights)
+
+        # Calculate portfolio returns
+        portfolio_returns = (self.data.pct_change() * weights_series.T).sum(axis=1)
+
+        # Plot portfolio returns using PyFolio
+        fig, ax = plt.subplots(figsize=(10, 6))
+        pf.plot_returns(portfolio_returns, ax=ax)
+
+        # Save the plot to the specified output folder
+        if not os.path.exists(self.output_folder):
+           os.makedirs(self.output_folder)
+
+        plot_filename = os.path.join(self.output_folder, 'portfolio_returns.png')
+        plt.savefig(plot_filename)
+        plt.close(fig)
+        print(f"Plot saved at {plot_filename}")

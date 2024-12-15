@@ -22,4 +22,5 @@ plots/
 notebooks/*.csv
 notebooks/*.txt
 visualizations/
+plot_returns/
 
