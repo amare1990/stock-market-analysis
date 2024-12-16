@@ -71,13 +71,13 @@ class stock_quantitative_analyzer:
     # Plot the effect of RSI over stock price
     def plot_rsi(self):
         # Drop rows with NaN values in either 'Close' or 'SMA_20'
-        valid_data = self.stock_data.dropna(subset=['RSI_14'])
+        valid_data = self.stock_data.dropna(subset=['Close', 'RSI_14'])
 
         # Plot using Plotly Express
         fig = px.line(
             valid_data,
             x=valid_data.index,
-            y='RSI_14',
+            y=['Close', 'RSI_14'],
             title="Relative Strength Index (RSI)"
         )
         fig.show()
@@ -94,14 +94,14 @@ class stock_quantitative_analyzer:
     # Plot the effect of RSI over stock price
     def plot_macd(self):
         # Drop rows with NaN values in either 'Close' or 'SMA_20'
-        valid_data = self.stock_data.dropna(subset=['MACD'])
+        valid_data = self.stock_data.dropna(subset=['Close', 'MACD'])
 
         # Plot using Plotly Express
         fig = px.line(
             valid_data,
             x=valid_data.index,
-            y=['MACD', 'MACD_signal', 'MACD_hist'],
-            title="Moving Average Convergence Divergence (MACD)"
+            y=['Close', 'MACD', 'MACD_signal', 'MACD_hist'],
+            title="Moving Average Convergence Divergence (MACD), MACD_signal, MACD_hist"
         )
         fig.show()
 
