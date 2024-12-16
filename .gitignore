@@ -21,4 +21,6 @@ plots/
 # Ignore large files
 notebooks/*.csv
 notebooks/*.txt
+visualizations/
+plot_returns/
 
