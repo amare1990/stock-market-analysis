@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
+import plotly.graph_objects as go
 import talib as ta
 import yfinance as yf
 from pynance import data as pynance_data
@@ -99,7 +100,7 @@ class stock_quantitative_analyzer:
         fig = px.line(
             valid_data,
             x=valid_data.index,
-            y='MACD',
+            y=['MACD', 'MACD_signal', 'MACD_hist'],
             title="Moving Average Convergence Divergence (MACD)"
         )
         fig.show()
@@ -112,5 +113,44 @@ class stock_quantitative_analyzer:
         plt.savefig(f"Plot saved at {file_path}")
 
         plt.close()
+
+    def plot_indicators(self):
+        # Drop rows with NaN values
+        valid_data = self.stock_data.dropna(subset=['Close', 'SMA-20', 'RSI_14', 'MACD', 'MACD_signal', 'MACD_hist'])
+
+        # Create figure
+        fig = go.Figure()
+
+        # Add the stock price (Close)
+        fig.add_trace(go.Scatter(x=valid_data.index, y=valid_data['Close'], mode='lines', name='Close Price'))
+
+        # Add indicators
+        fig.add_trace(go.Scatter(x=valid_data.index, y=valid_data['SMA-20'], mode='lines', name='SMA-20'))
+        fig.add_trace(go.Scatter(x=valid_data.index, y=valid_data['RSI_14'], mode='lines', name='RSI-14'))
+        fig.add_trace(go.Scatter(x=valid_data.index, y=valid_data['MACD'], mode='lines', name='MACD'))
+        fig.add_trace(go.Scatter(x=valid_data.index, y=valid_data['MACD_signal'], mode='lines', name='MACD Signal'))
+        fig.add_trace(go.Scatter(x=valid_data.index, y=valid_data['MACD_hist'], mode='lines', name='MACD Histogram'))
+
+        # Update layout for readability
+        fig.update_layout(
+            title="Effect of Financial Indicators on Stock Price",
+            xaxis_title="Date",
+            yaxis_title="Values",
+            legend_title="Indicators",
+            template="plotly_white"
+        )
+
+        # Show plot
+        fig.show()
+
+        # Save plot as a static image (optional, ensure Kaleido is installed)
+        if not os.path.exists(self.output_folder):
+            print(f"Output folder '{self.output_folder}' does not exist. Creating it.")
+            os.makedirs(self.output_folder)
+
+        file_path = os.path.join(self.output_folder, f'{self.ticker}_stock_fin_indicators.png')
+        fig.write_image(file_path)
+        print(f"Plot saved at {file_path}")
+
 
 
