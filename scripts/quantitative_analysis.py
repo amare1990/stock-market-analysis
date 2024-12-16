@@ -65,6 +65,29 @@ class stock_quantitative_analyzer:
         file_path = os.path.join(self.output_folder, f'{self.ticker}_stock_sma.png')
         plt.savefig(f"Plot saved at {file_path}")
 
-        fig.close()
+        plt.close()
+
+    # Plot the effect of RSI over stock price
+    def plot_rsi(self):
+        # Drop rows with NaN values in either 'Close' or 'SMA_20'
+        valid_data = self.stock_data.dropna(subset=['RSI_14'])
+
+        # Plot using Plotly Express
+        fig = px.line(
+            valid_data,
+            x=valid_data.index,
+            y='RSI_14',
+            title="Relative Strength Index (RSI)"
+        )
+        fig.show()
+
+        if not os.path.exists(self.output_folder):
+             print(f"Output folder '{self.output_folder}' does not exist. Creating it.")
+             os.makedirs(self.output_folder)
+
+        file_path = os.path.join(self.output_folder, f'{self.ticker}_stock_rsi.png')
+        plt.savefig(f"Plot saved at {file_path}")
+
+        plt.close()
 
 
