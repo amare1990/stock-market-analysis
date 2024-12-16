@@ -54,7 +54,7 @@ class stock_quantitative_analyzer:
             valid_data,
             x=valid_data.index,
             y=['Close', 'SMA-20'],
-            title="Stock price with moving average"
+            title="Stock Price with Simple Moving Average"
         )
         fig.show()
 
@@ -86,6 +86,29 @@ class stock_quantitative_analyzer:
              os.makedirs(self.output_folder)
 
         file_path = os.path.join(self.output_folder, f'{self.ticker}_stock_rsi.png')
+        plt.savefig(f"Plot saved at {file_path}")
+
+        plt.close()
+
+    # Plot the effect of RSI over stock price
+    def plot_macd(self):
+        # Drop rows with NaN values in either 'Close' or 'SMA_20'
+        valid_data = self.stock_data.dropna(subset=['MACD'])
+
+        # Plot using Plotly Express
+        fig = px.line(
+            valid_data,
+            x=valid_data.index,
+            y='MACD',
+            title="Moving Average Convergence Divergence (MACD)"
+        )
+        fig.show()
+
+        if not os.path.exists(self.output_folder):
+             print(f"Output folder '{self.output_folder}' does not exist. Creating it.")
+             os.makedirs(self.output_folder)
+
+        file_path = os.path.join(self.output_folder, f'{self.ticker}_stock_macd.png')
         plt.savefig(f"Plot saved at {file_path}")
 
         plt.close()
