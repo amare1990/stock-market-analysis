@@ -107,12 +107,14 @@ class stock_news_movement_analysis:
     # Calculate Daily Stock Returns
     def compute_daily_returns(self):
         """Calculate daily stock returns."""
-        self.merged_data['Daily_Return'] = self.merged_data['Close'].pct_change()
+        # self.merged_data['Daily_Return'] = self.merged_data['Close'].pct_change()
+        self.merged_data.loc[:, 'Daily_Return'] = self.merged_data['Close'].pct_change()
 
     def compute_correlation(self):
         """Compute correlation between sentiment and daily stock returns."""
         # Aggregate sentiment scores
         daily_sentiment = self.merged_data.groupby('Date')['Sentiment'].mean()
+        daily_sentiment = daily_sentiment.dropna()
 
         # Calculate correlation
         correlation = daily_sentiment.corr(self.merged_data['Daily_Return'])
