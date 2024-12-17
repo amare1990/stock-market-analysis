@@ -23,4 +23,5 @@ notebooks/*.csv
 notebooks/*.txt
 visualizations/
 plot_returns/
+notebooks/output_sentiment_movement/*
 
