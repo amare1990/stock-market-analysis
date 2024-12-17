@@ -17,6 +17,7 @@ corpus/
 
 # Ignore plots
 plots/
+plots_publisher/
 
 # Ignore large files
 notebooks/*.csv

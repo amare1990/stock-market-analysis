@@ -10,7 +10,7 @@ from pynance import data as pynance_data
 class stock_quantitative_analyzer:
     def __init__(self, ticker, start_date, end_date, output_folder):
         """
-        Initializes the StockAnalysisVisualizer class.
+        Initializes the stock_quantitative_analysis class
 
         Args:
             ticker (str): Stock symbol (e.g., 'AAPL').

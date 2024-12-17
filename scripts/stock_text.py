@@ -20,7 +20,7 @@ except LookupError as e:
 
 def clean_text(text):
     """
-    Cleans text by removing special characters, numbers, and extra spaces.
+    Cleans text by removing special characters, numbers, and extra spaces from the news data.
     """
     text = re.sub(r'[^a-zA-Z\s]', '', text)
     text = re.sub(r'\s+', ' ', text).strip()

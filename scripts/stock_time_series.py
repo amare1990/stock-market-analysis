@@ -2,8 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-import os
-
 def analyze_publication_frequency(df, date_column):
     """
     Analyzes the publication frequency over time.
@@ -16,7 +14,7 @@ def analyze_publication_frequency(df, date_column):
         pd.DataFrame: Time-series data of publication frequencies.
     """
     # Convert the date column to datetime
-    df[date_column] = pd.to_datetime(df[date_column])
+    df[date_column] = pd.to_datetime(df[date_column], errors='coerce')
 
     # Group by date and count publications
     daily_count = df.groupby(df[date_column].dt.date).size().reset_index(name='publication_count')

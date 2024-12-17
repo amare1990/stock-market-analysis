@@ -32,7 +32,7 @@ class PortfolioOptimizer:
 
     def calculate_portfolio_weights(self):
         """
-        Calculate the optimal portfolio weights using PyPortfolioOpt.
+        Calculate the optimal portfolio weights using pyfolioopt.
 
         :return: Dictionary of portfolio weights.
         """
