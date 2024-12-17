@@ -32,6 +32,7 @@ class stock_news_movement_analysis:
         """Load news data from a CSV file."""
         # Load news data
         self.news_data = pd.read_csv(news_file)
+        self.news_data = self.news_data[self.news_data['stock'] == self.tickers]
         self.news_data.rename(columns={'date': 'Date'}, inplace=True)  # Rename 'date' to 'Date'
 
         # Convert 'Date' to datetime
@@ -107,3 +108,13 @@ class stock_news_movement_analysis:
     def compute_daily_returns(self):
         """Calculate daily stock returns."""
         self.merged_data['Daily_Return'] = self.merged_data['Close'].pct_change()
+
+    def compute_correlation(self):
+        """Compute correlation between sentiment and daily stock returns."""
+        # Aggregate sentiment scores
+        daily_sentiment = self.merged_data.groupby('Date')['Sentiment'].mean()
+
+        # Calculate correlation
+        correlation = daily_sentiment.corr(self.merged_data['Daily_Return'])
+        print(f"Pearson correlation between sentiment and daily stock returns: {correlation}")
+        return correlation
