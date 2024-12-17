@@ -5,7 +5,7 @@
 ## Built With
 
 - Major languages used: Python3
-- Libraries: pandas, seaborn, matplotlib.pyplot, scikit-learn, scipy, plotly express, TA-lib, pyfolio, pyfolioopt, TextBlob
+- Libraries: pandas, seaborn, matplotlib.pyplot, scikit-learn, scipy, plotly express, TA-lib, yfinance, pyfolio, pyfolioopt, TextBlob
 - Tools and Technlogies used: jupyter notebook, Git, GitHub, Gitflow, VS code editor.
 
 ## Demonstration and Website
