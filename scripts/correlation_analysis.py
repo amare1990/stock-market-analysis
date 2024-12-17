@@ -102,3 +102,8 @@ class stock_news_movement_analysis:
             return analysis.sentiment.polarity
 
         self.merged_data['Sentiment'] = self.merged_data['headline'].apply(get_sentiment)
+
+    # Calculate Daily Stock Returns
+    def compute_daily_returns(self):
+        """Calculate daily stock returns."""
+        self.merged_data['Daily_Return'] = self.merged_data['Close'].pct_change()
