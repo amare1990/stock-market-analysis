@@ -11,7 +11,7 @@ def prepare_stock_data(file_path):
         pd.DataFrame: A prepared DataFrame with 'Date' as the index.
     """
 
-    file_path = "/home/am/Documents/Software Development/10_Academy Training/week1/Data/yfinance_data/AAPL_historical_data.csv"
+    # file_path = "/home/am/Documents/Software Development/10_Academy Training/week1/Data/yfinance_data/AAPL_historical_data.csv"
     # Load stock data
     df = pd.read_csv(file_path)
 
