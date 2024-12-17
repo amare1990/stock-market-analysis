@@ -31,7 +31,7 @@ You can clone my project and use it freely and then contribute to this project.
 - You have to install Python (version 3.8.10 minimum), pip, git, vscode.
 
 ### More information
-- You can refer to [this link](https://drive.google.com/file/d/1UB-amKpkxnqjNtFwb4ZFlE0fFMN7KpSr/view?usp=drive_link) to gain more insights about the report of this project.
+- You can refer to [this link](https://drive.google.com/file/d/1_bPxKy_s5h6CpvS34U3EOFu5QrZXIfqk/view?usp=sharing) to gain more insights about the report of this project.
 
 ## Authors
 
