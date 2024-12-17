@@ -93,3 +93,12 @@ class stock_news_movement_analysis:
         merged_data_path = os.path.join(self.output_folder, 'merged_stock_news_data.csv')
         self.merged_data.to_csv(merged_data_path, index=False)
         print(f"Merged data saved to {merged_data_path}.")
+
+    # Sentiment analysis
+    def perform_sentiment_analysis(self):
+        """Apply sentiment analysis to news headlines."""
+        def get_sentiment(text):
+            analysis = TextBlob(text)
+            return analysis.sentiment.polarity
+
+        self.merged_data['Sentiment'] = self.merged_data['headline'].apply(get_sentiment)
