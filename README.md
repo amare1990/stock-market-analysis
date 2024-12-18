@@ -1,4 +1,4 @@
-# Stock Market Analysis
+# Financial News and Stock Data Analysis
 
 > Stock Market Aanlysis is a data science project to statistically analyze and explore insights from financial news data and stock market data for Nova Financial Solutions company. This project not only apply Explotary data Discovery on financial datasets but attempts to calculate technical indicators using TA-lib, compute the portfolio weights and performance metrics using pytolio and pyfolioopt. It also calculates the daily stock returns and the sentiment tones. Finally it determines the corelation between the avergae daily sentiment and the daily stock returns. This project is implemented using Python programming language.
 
